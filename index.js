@@ -1,15 +1,18 @@
 const express = require('express');
-const session = require("express-session");
-const restaurantRoute = require('./routes/ecg');
-const path = require('path')
-const dotenv = require('dotenv');
-const cors = require('cors');
+const ecgRoute = require('./routes/api/ecg');
 
 const app = express()
 
 
+const {mongoose} = require("./config/mongoose");
+app.use(express.json());
 
-const { mongoose } = require("./config/mongoose");
+app.use('/api', ecgRoute);
 
-app.get("*", (req,res)
+app.get("*", (req, res) => {
+        res.status(404);
+        res.send()
+    }
 )
+
+app.listen(5000, "localhost", () => console.log(`Server running on port ${process.env.PORT}`));
