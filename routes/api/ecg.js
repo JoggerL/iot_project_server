@@ -10,6 +10,7 @@ router.get('/record/by_ts/:ts', mongoChecker, async (req, res) => {
         if (!ecg) {
             res.status(404).send()
         } else {
+            res.setHeader('Content-Type', 'application/json')
             res.send(JSON.stringify(ecg))
         }
     } catch (error) {
@@ -35,6 +36,7 @@ router.get('/record/all/:token', mongoChecker, async (req, res) => {
         if (!records) {
             res.status(500).send("server error")
         } else {
+            res.setHeader('Content-Type', 'application/json')
             res.send(JSON.stringify(records))
         }
     } catch (error) {
